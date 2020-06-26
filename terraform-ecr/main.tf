@@ -10,16 +10,11 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-# data "external" "body" {
-#   body = ["echo", "${data.aws_s3_bucket_object.desired_state_source.body}"]
-# }
-
 resource "aws_ecr_repository" "repo" {
-  # name = var.repo_name
-  name = local.program.repo_name
+  name = local.desired_state_json.repo_name
 
   image_scanning_configuration {
-    scan_on_push = false
+    scan_on_push = true
   }
 }
 
